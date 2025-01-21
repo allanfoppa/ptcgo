@@ -9,6 +9,7 @@ import { MetadataModule } from './common/helpers/metadata/metadata.module';
 import { LoggerModule } from './common/logger/logger.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { UsersModule } from './features/users/users.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { APP_GUARD } from '@nestjs/core';
     EnvironmentModule,
     MetadataModule,
     LoggerModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [
