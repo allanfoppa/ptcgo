@@ -11,8 +11,6 @@ services:
       - POSTGRES_DB=${DB_NAME}
     ports:
       - 5432:5432
-    networks:
-      - compose-bridge
 
   redis:
     container_name: ptcgo_cache
@@ -21,8 +19,6 @@ services:
       - redis:/data
     ports:
       - 6379:6379
-    networks:
-      - compose-bridge
 
   redis-commander:
     container_name: ptcgo_cache_commander
@@ -32,15 +28,7 @@ services:
       - REDIS_HOSTS=local:redis:6379
     ports:
       - 8081:8081
-    networks:
-      - compose-bridge
 
 volumes:
   redis:
     driver: local
-
-networks:
-  compose-bridge:
-    # A bridge network uses a software bridge which allows containers connected to the same bridge network to communicate,
-    # while providing isolation from containers which are not connected to that bridge network.
-    driver: bridge
