@@ -4,6 +4,7 @@ import {
   Body,
   UsePipes,
   InternalServerErrorException,
+  HttpStatus,
 } from '@nestjs/common';
 import { RegistrationService } from './registration.service';
 import {
@@ -13,6 +14,7 @@ import {
 import { ResponseHelper } from 'src/common/helpers/response/response.helper';
 import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
 import { FindService } from '../find/find.service';
+import { STATUS } from 'src/common/enums/status.enum';
 
 @Controller('v1/user')
 export class RegistrationController {
@@ -30,6 +32,8 @@ export class RegistrationController {
 
       if (userExists) {
         return this.responseHelper.createResponse({
+          status: STATUS.ERROR,
+          statusCode: HttpStatus.BAD_REQUEST,
           message: 'User already exists.',
           content: { userExists },
         });
@@ -39,6 +43,8 @@ export class RegistrationController {
         await this.registrationService.registration(registrationDto);
 
       return this.responseHelper.createResponse({
+        status: STATUS.SUCCESS,
+        statusCode: HttpStatus.OK,
         message: 'User create with success.',
         content: response,
       });

@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import helmet from 'helmet';
 
 export async function bootstrap() {
@@ -8,7 +7,6 @@ export async function bootstrap() {
 
   app.use(helmet());
   app.enableCors();
-  app.useGlobalInterceptors(new ResponseInterceptor());
 
   await app.listen(process.env.PORT ?? 5000);
 }

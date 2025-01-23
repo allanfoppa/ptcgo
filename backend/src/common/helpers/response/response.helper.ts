@@ -1,18 +1,28 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
+import { STATUS } from 'src/common/enums/status.enum';
 
 type TResponseHelper = {
+  status: STATUS;
+  statusCode: number;
   message: string;
-  additionalMetadata?: any;
   content?: any;
 };
 
 @Injectable()
 export class ResponseHelper {
-  createResponse({ message, content, additionalMetadata }: TResponseHelper) {
+  constructor(@Inject(REQUEST) private readonly request: Request) {}
+
+  createResponse({ status, statusCode, message, content }: TResponseHelper) {
     return {
       metadata: {
+        status,
+        statusCode,
         message,
-        additionalMetadata,
+        info: {
+          path: this.request.url,
+          timestamp: new Date().toISOString(),
+        },
       },
       content,
     };
