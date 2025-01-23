@@ -21,6 +21,15 @@ export class FindController {
     try {
       const response = await this.findService.find(username);
 
+      if (!response) {
+        return this.responseHelper.createResponse({
+          status: STATUS.ERROR,
+          statusCode: HttpStatus.BAD_REQUEST,
+          message: 'User not found.',
+          content: { userFound: response },
+        });
+      }
+
       return this.responseHelper.createResponse({
         status: STATUS.SUCCESS,
         statusCode: HttpStatus.OK,
