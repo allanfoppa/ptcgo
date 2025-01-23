@@ -4,20 +4,19 @@ import { MetadataHelper } from './common/helpers/metadata/metadata.helper';
 
 @Injectable()
 export class AppService {
-
   constructor(
     private readonly responseHelper: ResponseHelper,
-    private readonly metadataHelper: MetadataHelper
-  ){}
+    private readonly metadataHelper: MetadataHelper,
+  ) {}
 
   metadata(): object {
     try {
       return this.responseHelper.createResponse({
-        message: "Success retrieving metadata.",
+        message: 'Success retrieving metadata.',
         content: this.metadataHelper.get(),
       });
     } catch (error) {
-      throw new InternalServerErrorException();
+      throw new InternalServerErrorException(error.message);
     }
   }
 }

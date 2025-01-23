@@ -4,19 +4,15 @@ type TResponseHelper = {
   message: string;
   additionalMetadata?: any;
   content?: any;
-}
+};
 
 @Injectable()
 export class ResponseHelper {
-  createResponse({
-    message,
-    content,
-    additionalMetadata
-  }: TResponseHelper) {
+  createResponse({ message, content, additionalMetadata }: TResponseHelper) {
     return {
       metadata: {
         message,
-        additionalMetadata
+        additionalMetadata,
       },
       content,
     };

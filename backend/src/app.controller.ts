@@ -6,7 +6,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  metadata(): Object {
+  metadata(): object {
     return this.appService.metadata();
   }
 }
