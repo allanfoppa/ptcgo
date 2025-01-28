@@ -1,15 +1,15 @@
+import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { LoggerMiddleware } from './common/middlewares/logger.middleware';
-import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { EnvironmentModule } from './common/services/enviroments-variables/enviroments-variables.module';
 import { MetadataModule } from './common/helpers/metadata/metadata.module';
 import { LoggerModule } from './common/logger/logger.module';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { UserModule } from './features/user/user.module';
 import { ResponseHelper } from './common/helpers/response/response.helper';
+import { FeaturesModule } from './features/features.module';
 
 @Module({
   imports: [
@@ -23,7 +23,7 @@ import { ResponseHelper } from './common/helpers/response/response.helper';
     EnvironmentModule,
     MetadataModule,
     LoggerModule,
-    UserModule,
+    FeaturesModule,
   ],
   controllers: [AppController],
   providers: [

@@ -1,4 +1,6 @@
-# ANNOTATIONS
+# ANNOTATIONS - DEPRECATED
+
+OBS: __THIS APPROACH DOES NOT WORK THE WAY I THOUGHT__
 
 What we will try to implement here is that each file must have a unique responsibility, and cannot have a __create__ and __findOne__ method in the same file, for example.
 

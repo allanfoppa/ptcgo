@@ -4,19 +4,18 @@ import { DevelopmentLogger } from './logger-development.logger';
 import { UatLogger } from './logger-uat.logger';
 import { ProductionLogger } from './logger-production.logger';
 
-
 @Injectable()
 export class Logger {
-
   constructor(
     private readonly developmentLogger: DevelopmentLogger,
     private readonly uatLogger: UatLogger,
-    private readonly productionLogger: ProductionLogger
+    private readonly productionLogger: ProductionLogger,
   ) {}
 
   public create(logs: any): any {
-
-    const isInvalidEnv = !Object.values(ENVIROMENTS).includes(process.env.NODE_ENV);
+    const isInvalidEnv = !Object.values(ENVIROMENTS).includes(
+      process.env.NODE_ENV || '',
+    );
 
     if (isInvalidEnv) {
       throw new Error(`Invalid NODE_ENV value: ${process.env.NODE_ENV}`);
@@ -31,5 +30,4 @@ export class Logger {
     if (process.env.NODE_ENV === ENVIROMENTS.DEVELOPMENT)
       return this.developmentLogger.create(logs);
   }
-
 }

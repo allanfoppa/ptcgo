@@ -12,29 +12,31 @@ import {
   RegistrationDto,
 } from './dto/create-registration.dto';
 import { ResponseHelper } from 'src/common/helpers/response/response.helper';
-import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
-import { FindService } from '../find/find.service';
+import { ZodValidationPipe } from 'src/common/pipes/zod-validation/zod-validation.pipe';
+import { IsUsernameExistsService } from '../../common/helpers/database/is-username-exists/is-username-exists.service';
 import { STATUS } from 'src/common/enums/status.enum';
 
-@Controller('v1/user')
+@Controller('registration')
 export class RegistrationController {
   constructor(
     private readonly registrationService: RegistrationService,
     private readonly responseHelper: ResponseHelper,
-    private readonly findService: FindService,
+    private readonly isUsernameExistsService: IsUsernameExistsService,
   ) {}
 
-  @Post('registration')
+  @Post()
   @UsePipes(new ZodValidationPipe(registrationSchema))
   async registration(@Body() registrationDto: RegistrationDto) {
     try {
-      const userExists = await this.findService.find(registrationDto.username);
+      const userExists = await this.isUsernameExistsService.isUserExists(
+        registrationDto.username,
+      );
 
       if (userExists) {
         return this.responseHelper.createResponse({
           status: STATUS.ERROR,
-          statusCode: HttpStatus.BAD_REQUEST,
-          message: 'User already exists.',
+          statusCode: HttpStatus.CONFLICT,
+          message: 'Username is already in use.',
           content: { userExists },
         });
       }
@@ -44,7 +46,7 @@ export class RegistrationController {
 
       return this.responseHelper.createResponse({
         status: STATUS.SUCCESS,
-        statusCode: HttpStatus.OK,
+        statusCode: HttpStatus.CREATED,
         message: 'User create with success.',
         content: response,
       });

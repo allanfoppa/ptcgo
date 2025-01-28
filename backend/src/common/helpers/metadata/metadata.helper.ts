@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 type TMetadata = {
   title: string;
   summary: string;
-  version: string;
+  version: string | undefined;
   author: {
     name: string;
     email: string;
