@@ -3,7 +3,6 @@ import { AppModule } from './app.module';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
-import { ResponseHelper } from './common/helpers/response/response.helper';
 
 describe('AppModule', () => {
   let appModule: AppModule;
@@ -13,12 +12,12 @@ describe('AppModule', () => {
       imports: [
         ConfigModule.forRoot({
           isGlobal: true,
-          envFilePath: '.env'
+          envFilePath: '.env',
         }),
-        AppModule
+        AppModule,
       ],
       controllers: [AppController],
-      providers: [AppService, ResponseHelper],
+      providers: [AppService],
     }).compile();
 
     appModule = module.get<AppModule>(AppModule);
@@ -39,5 +38,4 @@ describe('AppModule', () => {
     expect(consumer.apply).toHaveBeenCalled();
     expect(consumer.forRoutes).toHaveBeenCalled();
   });
-
 });

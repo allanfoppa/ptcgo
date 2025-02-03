@@ -1,4 +1,4 @@
-import { APP_GUARD } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
@@ -6,9 +6,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { EnvironmentModule } from './common/services/enviroments-variables/enviroments-variables.module';
-import { MetadataModule } from './common/helpers/metadata/metadata.module';
 import { LoggerModule } from './common/logger/logger.module';
-import { FeaturesModule } from './features/features.module';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { ResponseInterceptor } from './common/interceptors/response/response.interceptor';
+// import { FeaturesModule } from './features/features.module';
 
 @Module({
   imports: [
@@ -20,9 +21,8 @@ import { FeaturesModule } from './features/features.module';
       },
     ]),
     EnvironmentModule,
-    MetadataModule,
     LoggerModule,
-    FeaturesModule,
+    // FeaturesModule,
   ],
   controllers: [AppController],
   providers: [
@@ -30,6 +30,14 @@ import { FeaturesModule } from './features/features.module';
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseInterceptor,
     },
   ],
 })

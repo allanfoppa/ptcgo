@@ -1,38 +1,21 @@
-import {
-  HttpStatus,
-  Injectable,
-  InternalServerErrorException,
-  Res,
-} from '@nestjs/common';
-import { MetadataHelper } from './common/helpers/metadata/metadata.helper';
-import { STATUS } from './common/enums/status.enum';
-import { Response } from 'express';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  private response: Response;
-
-  constructor(
-    @Res() response: Response,
-    private readonly metadataHelper: MetadataHelper,
-  ) {
-    this.response = response;
-  }
-
   metadata(): object {
+    const metadata = {
+      title: 'Pokémon trading card game organizer API',
+      summary: 'API to organize your Pokémon trading card game collection.',
+      version: process.env.APP_VERSION,
+      author: {
+        name: 'Allan Foppa Fagundes',
+        email: 'allanfoppa.dev@gmail.com',
+        githubProfile: 'https://github.com/allanfoppa',
+      },
+    };
+
     try {
-      return this.response.status(HttpStatus.OK).json({
-        metadata: {
-          status: STATUS.SUCCESS,
-          statusCode: HttpStatus.OK,
-          message: 'Success retrieving metadata.',
-          info: {
-            path: '/',
-            timestamp: new Date().toISOString(),
-          },
-        },
-        content: this.metadataHelper.get(),
-      });
+      return metadata;
     } catch (error) {
       throw new InternalServerErrorException(error.message);
     }
