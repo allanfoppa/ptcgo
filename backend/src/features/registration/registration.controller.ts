@@ -3,11 +3,8 @@ import {
   Post,
   Body,
   UsePipes,
-  InternalServerErrorException,
-  HttpStatus,
-  Res,
+  ConflictException,
 } from '@nestjs/common';
-import { Response } from 'express';
 import { RegistrationService } from './registration.service';
 import {
   registrationSchema,
@@ -15,7 +12,8 @@ import {
 } from './dto/create-registration.dto';
 import { ZodValidationPipe } from 'src/common/pipes/zod-validation/zod-validation.pipe';
 import { IsUsernameExistsService } from '../../common/helpers/database/is-username-exists/is-username-exists.service';
-import { STATUS } from 'src/common/enums/status.enum';
+import { ResponseHelper } from 'src/common/helpers/response/response.helper';
+import { ResponseCatchHelper } from 'src/common/helpers/response-catch/response-catch.helper';
 
 @Controller('registration')
 export class RegistrationController {
@@ -26,47 +24,30 @@ export class RegistrationController {
 
   @Post()
   @UsePipes(new ZodValidationPipe(registrationSchema))
-  async registration(
-    @Res() response: Response,
-    @Body() registrationDto: RegistrationDto,
-  ) {
+  async registration(@Body() registrationDto: RegistrationDto) {
     try {
-      const userExists = await this.isUsernameExistsService.isUserExists(
+      const isUserExists = await this.isUsernameExistsService.isUserExists(
         registrationDto.username,
       );
 
-      if (userExists) {
-        return response.status(HttpStatus.UNAUTHORIZED).json({
-          metadata: {
-            status: STATUS.ERROR,
-            statusCode: HttpStatus.CONFLICT,
-            message: 'Username is already in use.',
-            info: {
-              path: '/registration',
-              timestamp: new Date().toISOString(),
-            },
-          },
-          content: { userExists },
-        });
+      if (isUserExists) {
+        throw new ConflictException('Username is already in use.');
       }
 
       const registrationResponse =
         await this.registrationService.registration(registrationDto);
 
-      return response.status(HttpStatus.CREATED).json({
-        metadata: {
-          status: STATUS.SUCCESS,
-          statusCode: HttpStatus.CREATED,
-          message: 'User create with success.',
-          info: {
-            path: '/registration',
-            timestamp: new Date().toISOString(),
-          },
+      const { id, username } = registrationResponse;
+
+      return ResponseHelper.success({
+        message: 'Metadata retrieved successfully',
+        data: {
+          id,
+          username,
         },
-        content: registrationResponse,
       });
     } catch (error) {
-      throw new InternalServerErrorException(error.message);
+      ResponseCatchHelper.catch({ error });
     }
   }
 }

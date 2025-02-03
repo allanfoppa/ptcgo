@@ -15,6 +15,6 @@ export class RegistrationService {
       password: registrationDto.password,
     });
 
-    await this.registrationRepository.registration(registrationDto);
+    return await this.registrationRepository.registration(registrationDto);
   }
 }

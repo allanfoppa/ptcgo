@@ -7,10 +7,12 @@ export class RegistrationRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async registration(registrationDto: Prisma.UserCreateInput): Promise<User> {
+    const { username, password } = registrationDto;
+
     return this.prisma.user.create({
       data: {
-        username: registrationDto.username,
-        password: registrationDto.password,
+        username,
+        password,
       },
     });
   }

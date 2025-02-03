@@ -9,7 +9,7 @@ import { EnvironmentModule } from './common/services/enviroments-variables/envir
 import { LoggerModule } from './common/logger/logger.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ResponseInterceptor } from './common/interceptors/response/response.interceptor';
-// import { FeaturesModule } from './features/features.module';
+import { FeaturesModule } from './features/features.module';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { ResponseInterceptor } from './common/interceptors/response/response.int
     ]),
     EnvironmentModule,
     LoggerModule,
-    // FeaturesModule,
+    FeaturesModule,
   ],
   controllers: [AppController],
   providers: [
