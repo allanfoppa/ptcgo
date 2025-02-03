@@ -1,7 +1,7 @@
 import { PipeTransform, HttpStatus } from '@nestjs/common';
 import { ZodSchema } from 'zod';
+import { response } from 'express';
 import { STATUS } from '../../enums/status.enum';
-import { ResponseHelper } from '../../helpers/response/response.helper';
 
 export class ZodValidationPipe implements PipeTransform {
   constructor(private schema: ZodSchema) {}
@@ -12,10 +12,16 @@ export class ZodValidationPipe implements PipeTransform {
 
       return parsedValue;
     } catch (error) {
-      return new ResponseHelper({} as Request).createResponse({
-        status: STATUS.SUCCESS,
-        statusCode: HttpStatus.BAD_REQUEST,
-        message: `The attribute ${error.errors[0].path[0]}: ${error.errors[0].message}`,
+      return response.status(HttpStatus.OK).json({
+        metadata: {
+          status: STATUS.SUCCESS,
+          statusCode: HttpStatus.BAD_REQUEST,
+          message: `The attribute ${error.errors[0].path[0]}: ${error.errors[0].message}`,
+          info: {
+            path: '/',
+            timestamp: new Date().toISOString(),
+          },
+        },
       });
     }
   }

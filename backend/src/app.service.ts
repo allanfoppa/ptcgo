@@ -2,24 +2,35 @@ import {
   HttpStatus,
   Injectable,
   InternalServerErrorException,
+  Res,
 } from '@nestjs/common';
-import { ResponseHelper } from './common/helpers/response/response.helper';
 import { MetadataHelper } from './common/helpers/metadata/metadata.helper';
 import { STATUS } from './common/enums/status.enum';
+import { Response } from 'express';
 
 @Injectable()
 export class AppService {
+  private response: Response;
+
   constructor(
-    private readonly responseHelper: ResponseHelper,
+    @Res() response: Response,
     private readonly metadataHelper: MetadataHelper,
-  ) {}
+  ) {
+    this.response = response;
+  }
 
   metadata(): object {
     try {
-      return this.responseHelper.createResponse({
-        status: STATUS.SUCCESS,
-        statusCode: HttpStatus.OK,
-        message: 'Success retrieving metadata.',
+      return this.response.status(HttpStatus.OK).json({
+        metadata: {
+          status: STATUS.SUCCESS,
+          statusCode: HttpStatus.OK,
+          message: 'Success retrieving metadata.',
+          info: {
+            path: '/',
+            timestamp: new Date().toISOString(),
+          },
+        },
         content: this.metadataHelper.get(),
       });
     } catch (error) {

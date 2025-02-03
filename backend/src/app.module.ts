@@ -8,7 +8,6 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { EnvironmentModule } from './common/services/enviroments-variables/enviroments-variables.module';
 import { MetadataModule } from './common/helpers/metadata/metadata.module';
 import { LoggerModule } from './common/logger/logger.module';
-import { ResponseHelper } from './common/helpers/response/response.helper';
 import { FeaturesModule } from './features/features.module';
 
 @Module({
@@ -28,7 +27,6 @@ import { FeaturesModule } from './features/features.module';
   controllers: [AppController],
   providers: [
     AppService,
-    ResponseHelper,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

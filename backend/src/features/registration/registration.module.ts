@@ -4,7 +4,6 @@ import { RegistrationController } from './registration.controller';
 import { HashingHelper } from 'src/common/helpers/hashing/hashing.helper';
 import { RegistrationRepository } from './registration.repository';
 import { PrismaService } from 'src/common/services/prisma/prisma.service';
-import { ResponseHelper } from 'src/common/helpers/response/response.helper';
 import { IsUsernameExistsService } from 'src/common/helpers/database/is-username-exists/is-username-exists.service';
 import { IsUsernameExistsRepository } from 'src/common/helpers/database/is-username-exists/is-username-exists.repository';
 
@@ -15,7 +14,6 @@ import { IsUsernameExistsRepository } from 'src/common/helpers/database/is-usern
     RegistrationService,
     RegistrationRepository,
     HashingHelper,
-    ResponseHelper,
     PrismaService,
     IsUsernameExistsService,
     IsUsernameExistsRepository,

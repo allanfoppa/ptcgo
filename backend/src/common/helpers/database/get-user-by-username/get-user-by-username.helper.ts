@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { GetUserByUsernameRepository } from './get-user-by-username.repository';
 
 @Injectable()
-export class GetUserByUsernameService {
+export class GetUserByUserNameHelper {
   constructor(
     private readonly getUserByUsernameRepository: GetUserByUsernameRepository,
   ) {}

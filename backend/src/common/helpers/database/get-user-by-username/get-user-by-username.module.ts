@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
-import { GetUserByUsernameService } from './get-user-by-username.service';
+import { GetUserByUserNameHelper } from './get-user-by-username.helper';
 import { GetUserByUsernameRepository } from './get-user-by-username.repository';
+import { PrismaService } from 'src/common/services/prisma/prisma.service';
 
 @Module({
   imports: [],
   controllers: [],
-  providers: [GetUserByUsernameService, GetUserByUsernameRepository],
+  providers: [
+    GetUserByUserNameHelper,
+    GetUserByUsernameRepository,
+    PrismaService,
+  ],
 })
 export class GetUserByUsernameModule {}
