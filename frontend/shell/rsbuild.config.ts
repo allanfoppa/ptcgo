@@ -11,9 +11,10 @@ export default defineConfig({
      name: 'shell',
      exposes: {}, // COULD NOT HAVE ANY EXPOSED COMPONENT
      remotes: {
-        // COULD HAVE MANY REMOTES HAS YOU NEED
+      // COULD HAVE MANY REMOTES HAS YOU NEED
       core: 'core@http://localhost:3002/remoteEntry.js',
       dashboard: 'dashboard@http://localhost:3003/remoteEntry.js',
+      login: 'login@http://localhost:3004/remoteEntry.js',
      },
      shared: {
        ...dependencies,

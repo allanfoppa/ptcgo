@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import './App.css';
 import { GlobalContext } from 'core/GlobalContext'
 import { PlaceholderText } from 'core/Placeholder'
 

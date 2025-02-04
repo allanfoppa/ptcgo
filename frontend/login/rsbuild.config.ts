@@ -4,15 +4,15 @@ import { dependencies }  from './package.json';
 
 export default defineConfig({
   server: {
-    port: 3003
+    port: 3004
   },
   moduleFederation: {
     options: {
-     name: 'dashboard',
+      name: 'login',
       exposes: {
         // MUST HAVE ONLY ONE EXPOSED COMPONENT IN THIS CASE
-        // DASHBOARD VIEW
-        './Dashboard': './src/App',
+        // LOGIN VIEW
+        './Login': './src/App',
       },
       remotes: {
         // COULD HAVE MANY REMOTES HAS YOU NEED
@@ -30,7 +30,7 @@ export default defineConfig({
           requiredVersion: dependencies['react-dom'],
         },
       },
-    }
+    },
   },
   plugins: [pluginReact()],
 });

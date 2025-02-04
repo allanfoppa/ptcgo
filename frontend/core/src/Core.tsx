@@ -1,4 +1,4 @@
-import './App.css';
+import './Core.css';
 
 const Core = () => {
   return (

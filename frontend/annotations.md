@@ -15,7 +15,7 @@ mv src/index.tsx src/bootstrap.tsx
 ```
 
 ```shell
-touch index.tsx
+touch src/index.tsx
 
 # and add
 # import('./bootstrap');
@@ -43,6 +43,7 @@ This means you can extend an interface by declaring it a second time.
 - SHELL: 3001
 - CORE: 3002
 - DASHBOARD: 3003
+- LOGIN: 3004
 
 PS: Create a .env in the future
 

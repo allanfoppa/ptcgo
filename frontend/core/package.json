@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "rsbuild dev --open",
     "build": "rsbuild build",
-    "preview": "rsbuild preview"
+    "preview": "rsbuild preview",
+    "style:tailwind": "tailwindcss -i src/styles/tailwind.css -o src/styles/index.css"
   },
   "dependencies": {
     "react": "^19.0.0",
