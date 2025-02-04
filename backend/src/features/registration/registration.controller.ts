@@ -14,6 +14,7 @@ import { ZodValidationPipe } from 'src/common/pipes/zod-validation/zod-validatio
 import { IsUsernameExistsService } from '../../common/helpers/database/is-username-exists/is-username-exists.service';
 import { ResponseHelper } from 'src/common/helpers/response/response.helper';
 import { ResponseCatchHelper } from 'src/common/helpers/response-catch/response-catch.helper';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('registration')
 export class RegistrationController {
@@ -23,6 +24,7 @@ export class RegistrationController {
   ) {}
 
   @Post()
+  @Public()
   @UsePipes(new ZodValidationPipe(registrationSchema))
   async registration(@Body() registrationDto: RegistrationDto) {
     try {
@@ -40,7 +42,7 @@ export class RegistrationController {
       const { id, username } = registrationResponse;
 
       return ResponseHelper.success({
-        message: 'Metadata retrieved successfully',
+        message: 'Registration successful',
         data: {
           id,
           username,

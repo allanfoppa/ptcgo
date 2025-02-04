@@ -9,6 +9,6 @@ export class ResponseCatchHelper {
     if (error instanceof HttpException) {
       throw error;
     }
-    throw new InternalServerErrorException(error.message);
+    throw new InternalServerErrorException(error?.message);
   }
 }

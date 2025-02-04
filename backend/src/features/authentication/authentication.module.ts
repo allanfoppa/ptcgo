@@ -5,9 +5,18 @@ import { ValidatePasswordModule } from 'src/common/helpers/validate-password/val
 import { GetUserByUserNameHelper } from 'src/common/helpers/database/get-user-by-username/get-user-by-username.helper';
 import { GetUserByUsernameRepository } from 'src/common/helpers/database/get-user-by-username/get-user-by-username.repository';
 import { PrismaService } from 'src/common/services/prisma/prisma.service';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './authentication.constants';
 
 @Module({
-  imports: [ValidatePasswordModule],
+  imports: [
+    ValidatePasswordModule,
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '1h' },
+    }),
+  ],
   controllers: [AuthenticationController],
   providers: [
     AuthenticationService,
@@ -15,5 +24,6 @@ import { PrismaService } from 'src/common/services/prisma/prisma.service';
     GetUserByUsernameRepository,
     PrismaService,
   ],
+  exports: [AuthenticationService],
 })
 export class AuthenticationModule {}

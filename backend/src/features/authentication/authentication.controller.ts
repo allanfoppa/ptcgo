@@ -1,4 +1,12 @@
-import { Body, Controller, Post, UsePipes } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  // HttpException,
+  // InternalServerErrorException,
+  Post,
+  UsePipes,
+} from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
 import {
   AuthenticationDto,
@@ -6,19 +14,26 @@ import {
 } from './dto/authentication.dto';
 import { ZodValidationPipe } from 'src/common/pipes/zod-validation/zod-validation.pipe';
 import { ResponseCatchHelper } from 'src/common/helpers/response-catch/response-catch.helper';
+import { ResponseHelper } from 'src/common/helpers/response/response.helper';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('authentication')
 export class AuthenticationController {
   constructor(private readonly authenticationService: AuthenticationService) {}
 
   @Post()
+  @Public()
+  @HttpCode(200)
   @UsePipes(new ZodValidationPipe(authenticationSchema))
   async auth(@Body() authenticationDto: AuthenticationDto) {
     try {
-      console.log(authenticationDto);
-      return this.authenticationService.auth(authenticationDto);
+      const response = await this.authenticationService.auth(authenticationDto);
+      return ResponseHelper.success({
+        message: 'Login successful',
+        data: response,
+      });
     } catch (error) {
-      ResponseCatchHelper.catch(error.message);
+      return ResponseCatchHelper.catch({ error });
     }
   }
 }

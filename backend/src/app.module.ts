@@ -10,6 +10,7 @@ import { LoggerModule } from './common/logger/logger.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ResponseInterceptor } from './common/interceptors/response/response.interceptor';
 import { FeaturesModule } from './features/features.module';
+import { AuthGuard } from './features/authentication/authentication.guard';
 
 @Module({
   imports: [
@@ -30,6 +31,10 @@ import { FeaturesModule } from './features/features.module';
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
     },
     {
       provide: APP_FILTER,
