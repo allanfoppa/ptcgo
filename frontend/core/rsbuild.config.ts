@@ -10,12 +10,6 @@ export default defineConfig({
 		options: {
 			name: "core",
 			exposes: {
-				// COMPONENTS
-				// // FORM
-				"./Password": "./src/components/Form/Password",
-				"./InputText": "./src/components/Form/InputText",
-				// // BUTTON
-				"./Button": "./src/components/Button/Button",
 				// // GENERICS
 				"./Placeholder": "./src/components/Generics/Placeholder",
 				"./InputLabel": "./src/components/Generics/InputLabel",

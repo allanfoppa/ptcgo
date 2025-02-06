@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { ENDPOINT_AUTHENTICATION } from "../constants/endpoints.contant";
 
 type TAuthenticationRequest = {
@@ -19,6 +20,10 @@ type TAuthenticationResponse = {
 		username: string;
 		access_token: string;
 	};
+	errors: {
+		field: string;
+		message: string;
+	}[];
 };
 
 export const authentication = async (
@@ -28,9 +33,21 @@ export const authentication = async (
 	const username = formData.get("username") as string;
 	const password = formData.get("password") as string;
 
-	if (username === '' || password === '') {
-		// TODO: Validate with Zod
-		throw new Error("Username or password is missing");
+	const schema = z.object({
+		username: z.string().min(1, { message: "Username is required" }),
+		password: z.string().min(1, { message: "Password is required" }),
+	});
+
+	const validation = schema.safeParse({ username, password });
+
+	if (!validation.success) {
+		const errors = validation.error.issues.reduce((acc: Record<string, string>, issue) => {
+			acc[issue.path[0] as string] = issue.message;
+			return acc;
+		}, {} as Record<string, string>);
+		return {
+			errors: Object.entries(errors).map(([field, message]) => ({ field, message })),
+		} as TAuthenticationResponse;
 	}
 
 	const data: TAuthenticationRequest = { username, password };
@@ -45,6 +62,5 @@ export const authentication = async (
 
 	const response = await fetch(ENDPOINT_AUTHENTICATION, params);
 	const json = await response.json();
-	console.log("json", json);
 	return json;
 };
