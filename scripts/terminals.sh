@@ -11,4 +11,5 @@ gnome-terminal \
   --tab --working-directory=${pwd_path}/frontend/shell \
   --tab --working-directory=${pwd_path}/frontend/core \
   --tab --working-directory=${pwd_path}/frontend/dashboard \
-  --tab --working-directory=${pwd_path}/frontend/login
+  --tab --working-directory=${pwd_path}/frontend/login \
+  --tab --working-directory=${pwd_path}/frontend/not-found

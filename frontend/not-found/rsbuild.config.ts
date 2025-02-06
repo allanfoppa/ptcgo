@@ -1,18 +1,18 @@
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
-import { dependencies } from './package.json';
+import { dependencies }  from './package.json';
 
 export default defineConfig({
   server: {
-    port: 3004,
+    port: 3005
   },
   moduleFederation: {
     options: {
-      name: 'login',
+     name: 'notFound',
       exposes: {
         // MUST HAVE ONLY ONE EXPOSED COMPONENT IN THIS CASE
-        // LOGIN VIEW
-        './Login': './src/App',
+        // DASHBOARD VIEW
+        './NotFound': './src/App',
       },
       remotes: {
         // COULD HAVE MANY REMOTES HAS YOU NEED
@@ -30,7 +30,8 @@ export default defineConfig({
           requiredVersion: dependencies['react-dom'],
         },
       },
-    },
+    }
   },
   plugins: [pluginReact()],
 });
+

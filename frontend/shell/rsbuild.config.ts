@@ -15,6 +15,7 @@ export default defineConfig({
       core: 'core@http://localhost:3002/remoteEntry.js',
       dashboard: 'dashboard@http://localhost:3003/remoteEntry.js',
       login: 'login@http://localhost:3004/remoteEntry.js',
+      notFound: 'notFound@http://localhost:3005/remoteEntry.js',
      },
      shared: {
        ...dependencies,

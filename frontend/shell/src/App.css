@@ -1,12 +1,11 @@
-body {
-  margin: 0;
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-}
+@import 'primereact/resources/primereact.min.css';
+@import 'primereact/resources/themes/lara-dark-purple/theme.css';
+@import 'primeicons/primeicons.css';
+@import 'primeflex/primeflex.css';
 
-.content {
-  display: flex;
-  min-height: 100vh;
-  line-height: 1.1;
-  text-align: center;
-  flex-direction: column;
-}
+/**
+ * sm: => small screens e.g. phones     => @media screen and (min-width: 576px)
+ * md: => medium screens e.g. tablets   => @media screen and (min-width: 768px)
+ * lg: => large screens e.g. notebooks  => @media screen and (min-width: 992px)
+ * xl: => larger screens e.g monitors   => @media screen and (min-width: 1200px)
+ */

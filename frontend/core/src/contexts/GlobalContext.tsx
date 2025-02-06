@@ -1,4 +1,5 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import type React from 'react';
+import { createContext, useState, type ReactNode } from 'react'
 
 type TGlobalContext = {
   loading: boolean;
