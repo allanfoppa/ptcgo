@@ -1,8 +1,19 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+
+type TMetadata = {
+  title: string;
+  summary: string;
+  version: string | undefined;
+  author: {
+    name: string;
+    email: string;
+    githubProfile: string;
+  };
+}
 
 @Injectable()
 export class AppService {
-  metadata(): object {
+  metadata(): TMetadata {
     const metadata = {
       title: 'Pokémon trading card game organizer API',
       summary: 'API to organize your Pokémon trading card game collection.',
@@ -14,10 +25,6 @@ export class AppService {
       },
     };
 
-    try {
-      return metadata;
-    } catch (error) {
-      throw new InternalServerErrorException(error.message);
-    }
+    return metadata;
   }
 }

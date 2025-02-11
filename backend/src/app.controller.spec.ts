@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MetadataHelper } from './common/helpers/metadata/metadata.helper';
+
 
 describe('AppController', () => {
   let appController: AppController;
   let appService: AppService;
-  let metadataHelper: MetadataHelper;
+
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -18,25 +18,27 @@ describe('AppController', () => {
             metadata: jest.fn(),
           },
         },
-        {
-          provide: MetadataHelper,
-          useValue: {
-            get: jest.fn(),
-          },
-        },
       ],
     }).compile();
 
     appController = module.get<AppController>(AppController);
     appService = module.get<AppService>(AppService);
-    metadataHelper = module.get<MetadataHelper>(MetadataHelper);
   });
 
   it('should return metadata from AppService', () => {
     // Arrange: Set up the mock return value for metadata method
     const expectedMetadata = {
       message: 'Success retrieving metadata.',
-      data: metadataHelper.get()
+      data: {
+        title: 'Pokémon trading card game organizer API',
+        summary: 'API to organize your Pokémon trading card game collection.',
+        version: '1.0.0',
+        author: {
+          name: 'Allan Foppa Fagundes',
+          email: 'allanfoppa.dev@gmail.com',
+          githubProfile: 'https://github.com/allanfoppa',
+        },
+      }
     };
 
     (appService.metadata as jest.Mock).mockReturnValue(expectedMetadata);
@@ -48,4 +50,17 @@ describe('AppController', () => {
     expect(appService.metadata).toHaveBeenCalled();
     expect(result).toEqual(expectedMetadata);
   });
+
+  it('should throw an error when AppService fails', () => {
+    // Arrange: Set up the mock return value for metadata method
+    (appService.metadata as jest.Mock).mockImplementation(() => {
+      throw new Error('Internal server error');
+    });
+
+    // Act: Call the metadata method of the controller
+    const result = () => appController.metadata();
+
+    // Assert: Ensure an error is thrown
+    expect(result).toThrow()
+  })
 });

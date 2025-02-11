@@ -1,7 +1,5 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ResponseInterceptor } from './common/interceptors/response.interceptor';
+import { ResponseInterceptor } from './common/interceptors/response/response.interceptor';
 
 // Mocking the required parts of the application
 jest.mock('@nestjs/core', () => ({
@@ -22,8 +20,8 @@ describe('Bootstrap', () => {
 
     (NestFactory.create as jest.Mock).mockResolvedValue(app);
 
-    const { bootstrap } = await import('./main'); // Import the bootstrap function dynamically
-    await bootstrap(); // Call the bootstrap function
+    const { bootstrap } = await import('./main');
+    await bootstrap();
   });
 
   it('should enable CORS', () => {
