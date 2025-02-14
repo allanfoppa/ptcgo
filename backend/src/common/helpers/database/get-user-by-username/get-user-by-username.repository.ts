@@ -6,11 +6,11 @@ type TUser = {
   username: string;
   password: string;
   createdAt: Date;
-}
+};
 
 @Injectable()
 export class GetUserByUsernameRepository {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async getUser(username: string): Promise<TUser | null> {
     const user = await this.prisma.user.findFirst({
