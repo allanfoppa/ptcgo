@@ -8,7 +8,6 @@ const { combine, timestamp, label } = format;
 
 @Injectable()
 export class UatLogger {
-
   public create(logs: any): object {
     return createLogger({
       level: 'info',
@@ -16,13 +15,13 @@ export class UatLogger {
         format.colorize(),
         label({ label: ENVIROMENTS.UAT }),
         timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-        loggerFormat()
+        loggerFormat(),
       ),
       transports: [
         new transports.File({ filename: LOGS_PATH.UAT, level: 'error' }),
         new transports.File({ filename: LOGS_PATH.COMBINED }),
-        new transports.Console()
-      ]
+        new transports.Console(),
+      ],
     }).info(logs);
-  };
-};
+  }
+}

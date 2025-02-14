@@ -10,14 +10,15 @@
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
-    "baseUrl": "src",
+    "baseUrl": "./src",
+    "resolveJsonModule": true,
     "paths": {
       "@common/*": [
         "common/*"
       ],
       "@features/*": [
         "features/*"
-      ],
+      ]
     },
     "incremental": true,
     "skipLibCheck": true,

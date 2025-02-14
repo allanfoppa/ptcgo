@@ -5,8 +5,6 @@ import { DevelopmentLogger } from './logger-development.logger';
 import { UatLogger } from './logger-uat.logger';
 import { ProductionLogger } from './logger-production.logger';
 
-
-
 @Global()
 @Module({
   imports: [
@@ -14,14 +12,7 @@ import { ProductionLogger } from './logger-production.logger';
       isGlobal: true,
     }),
   ],
-  providers: [
-    Logger,
-    DevelopmentLogger,
-    UatLogger,
-    ProductionLogger
-  ],
-  exports: [
-    Logger
-  ],
+  providers: [Logger, DevelopmentLogger, UatLogger, ProductionLogger],
+  exports: [Logger],
 })
 export class LoggerModule {}

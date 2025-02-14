@@ -9,7 +9,7 @@ type TMetadata = {
     email: string;
     githubProfile: string;
   };
-}
+};
 
 @Injectable()
 export class AppService {

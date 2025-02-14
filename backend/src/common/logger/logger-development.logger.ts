@@ -8,7 +8,6 @@ const { combine, timestamp, label } = format;
 
 @Injectable()
 export class DevelopmentLogger {
-
   public create(logs: any): object {
     return createLogger({
       level: 'debug',
@@ -16,13 +15,13 @@ export class DevelopmentLogger {
         format.colorize(),
         label({ label: ENVIROMENTS.DEVELOPMENT }),
         timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-        loggerFormat()
+        loggerFormat(),
       ),
       transports: [
         new transports.File({ filename: LOGS_PATH.DEBUG, level: 'error' }),
         new transports.File({ filename: LOGS_PATH.COMBINED }),
-        new transports.Console()
-      ]
+        new transports.Console(),
+      ],
     }).debug(logs);
-  };
-};
+  }
+}
