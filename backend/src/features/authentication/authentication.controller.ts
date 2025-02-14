@@ -12,14 +12,14 @@ import {
   AuthenticationDto,
   authenticationSchema,
 } from './dto/authentication.dto';
-import { ZodValidationPipe } from 'src/common/pipes/zod-validation/zod-validation.pipe';
-import { ResponseCatchHelper } from 'src/common/helpers/response-catch/response-catch.helper';
-import { ResponseHelper } from 'src/common/helpers/response/response.helper';
-import { Public } from 'src/common/decorators/public.decorator';
+import { ZodValidationPipe } from '@common/pipes/zod-validation/zod-validation.pipe';
+import { ResponseCatchHelper } from '@common/helpers/response-catch/response-catch.helper';
+import { ResponseHelper } from '@common/helpers/response/response.helper';
+import { Public } from '@common/decorators/public.decorator';
 
 @Controller('authentication')
 export class AuthenticationController {
-  constructor(private readonly authenticationService: AuthenticationService) {}
+  constructor(private readonly authenticationService: AuthenticationService) { }
 
   @Post()
   @Public()

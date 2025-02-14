@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GetUserByUserNameHelper } from './get-user-by-username.helper';
 import { GetUserByUsernameRepository } from './get-user-by-username.repository';
-import { PrismaService } from 'src/common/services/prisma/prisma.service';
+import { PrismaService } from '@common/services/prisma/prisma.service';
 
 @Module({
   imports: [],
@@ -12,4 +12,4 @@ import { PrismaService } from 'src/common/services/prisma/prisma.service';
     PrismaService,
   ],
 })
-export class GetUserByUsernameModule {}
+export class GetUserByUsernameModule { }

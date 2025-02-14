@@ -4,14 +4,14 @@ import {
   registrationSchema,
   RegistrationDto,
 } from './dto/create-registration.dto';
-import { ZodValidationPipe } from 'src/common/pipes/zod-validation/zod-validation.pipe';
-import { ResponseHelper } from 'src/common/helpers/response/response.helper';
-import { ResponseCatchHelper } from 'src/common/helpers/response-catch/response-catch.helper';
-import { Public } from 'src/common/decorators/public.decorator';
+import { ZodValidationPipe } from '@common/pipes/zod-validation/zod-validation.pipe';
+import { ResponseHelper } from '@common/helpers/response/response.helper';
+import { ResponseCatchHelper } from '@common/helpers/response-catch/response-catch.helper';
+import { Public } from '@common/decorators/public.decorator';
 
 @Controller('registration')
 export class RegistrationController {
-  constructor(private readonly registrationService: RegistrationService) {}
+  constructor(private readonly registrationService: RegistrationService) { }
 
   @Post()
   @Public()

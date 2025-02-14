@@ -1,4 +1,4 @@
-import { required } from 'src/common/utilities/mark-as-required.util';
+import { required } from '@common/utilities/mark-as-required.util';
 import { z } from 'zod';
 
 export const authenticationSchema = z

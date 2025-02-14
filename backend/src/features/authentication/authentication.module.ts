@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
 import { AuthenticationController } from './authentication.controller';
-import { ValidatePasswordModule } from 'src/common/helpers/validate-password/validate-password.module';
-import { GetUserByUserNameHelper } from 'src/common/helpers/database/get-user-by-username/get-user-by-username.helper';
-import { GetUserByUsernameRepository } from 'src/common/helpers/database/get-user-by-username/get-user-by-username.repository';
-import { PrismaService } from 'src/common/services/prisma/prisma.service';
+import { ValidatePasswordModule } from '@common/helpers/validate-password/validate-password.module';
+import { GetUserByUserNameHelper } from '@common/helpers/database/get-user-by-username/get-user-by-username.helper';
+import { GetUserByUsernameRepository } from '@common/helpers/database/get-user-by-username/get-user-by-username.repository';
+import { PrismaService } from '@common/services/prisma/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './authentication.constants';
 
@@ -26,4 +26,4 @@ import { jwtConstants } from './authentication.constants';
   ],
   exports: [AuthenticationService],
 })
-export class AuthenticationModule {}
+export class AuthenticationModule { }

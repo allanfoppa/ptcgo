@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ResponseInterceptor } from './common/interceptors/response/response.interceptor';
+import { ResponseInterceptor } from '@common/interceptors/response/response.interceptor';
 
 // Mocking the required parts of the application
 jest.mock('@nestjs/core', () => ({

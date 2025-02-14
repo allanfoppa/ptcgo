@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/common/services/prisma/prisma.service';
+import { PrismaService } from '@common/services/prisma/prisma.service';
 
 type TUser = {
   id: number;

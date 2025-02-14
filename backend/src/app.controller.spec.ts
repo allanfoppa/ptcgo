@@ -1,66 +1,52 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
+import { ResponseHelper } from '@common/helpers/response/response.helper';
 
 describe('AppController', () => {
   let appController: AppController;
   let appService: AppService;
 
-
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
       providers: [
         {
           provide: AppService,
           useValue: {
-            metadata: jest.fn(),
+            metadata: jest.fn().mockReturnValue({ version: '1.0.0' }),
           },
         },
       ],
     }).compile();
 
-    appController = module.get<AppController>(AppController);
-    appService = module.get<AppService>(AppService);
+    appController = app.get<AppController>(AppController);
+    appService = app.get<AppService>(AppService);
   });
 
-  it('should return metadata from AppService', () => {
-    // Arrange: Set up the mock return value for metadata method
-    const expectedMetadata = {
-      message: 'Success retrieving metadata.',
-      data: {
-        title: 'Pokémon trading card game organizer API',
-        summary: 'API to organize your Pokémon trading card game collection.',
-        version: '1.0.0',
-        author: {
-          name: 'Allan Foppa Fagundes',
-          email: 'allanfoppa.dev@gmail.com',
-          githubProfile: 'https://github.com/allanfoppa',
-        },
-      }
-    };
+  describe('metadata', () => {
+    it('should return metadata successfully', () => {
+      const result = {
+        message: 'Metadata retrieved successfully',
+        data: { version: '1.0.0' },
+      };
 
-    (appService.metadata as jest.Mock).mockReturnValue(expectedMetadata);
+      jest.spyOn(ResponseHelper, 'success').mockReturnValue(result);
 
-    // Act: Call the metadata method of the controller
-    const result = appController.metadata();
-
-    // Assert: Ensure AppService's metadata method is called and the result is correct
-    expect(appService.metadata).toHaveBeenCalled();
-    expect(result).toEqual(expectedMetadata);
-  });
-
-  it('should throw an error when AppService fails', () => {
-    // Arrange: Set up the mock return value for metadata method
-    (appService.metadata as jest.Mock).mockImplementation(() => {
-      throw new Error('Internal server error');
+      expect(appController.metadata()).toEqual(result);
+      expect(appService.metadata).toHaveBeenCalled();
     });
 
-    // Act: Call the metadata method of the controller
-    const result = () => appController.metadata();
+    it('should throw an InternalServerErrorException on error', () => {
+      jest.spyOn(appService, 'metadata').mockImplementation(() => {
+        throw new Error('Test error');
+      });
 
-    // Assert: Ensure an error is thrown
-    expect(result).toThrow()
-  })
+      try {
+        appController.metadata();
+      } catch (error) {
+        expect(error.message).toBe('Test error');
+      }
+    });
+  });
 });

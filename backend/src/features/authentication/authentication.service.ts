@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { GetUserByUserNameHelper } from 'src/common/helpers/database/get-user-by-username/get-user-by-username.helper';
-import { ValidatePasswordHelper } from 'src/common/helpers/validate-password/validate-password.helper';
+import { GetUserByUserNameHelper } from '@common/helpers/database/get-user-by-username/get-user-by-username.helper';
+import { ValidatePasswordHelper } from '@common/helpers/validate-password/validate-password.helper';
 import { AuthenticationDto } from './dto/authentication.dto';
 import { JwtService } from '@nestjs/jwt';
 
@@ -10,7 +10,7 @@ export class AuthenticationService {
     private readonly validatePassword: ValidatePasswordHelper,
     private readonly getUserByUserName: GetUserByUserNameHelper,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async auth(authenticationDto: AuthenticationDto) {
     const user = await this.getUserByUserName.getUser(

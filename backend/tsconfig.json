@@ -9,7 +9,16 @@
     "target": "ES2021",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "moduleResolution": "node",
+    "baseUrl": "src",
+    "paths": {
+      "@common/*": [
+        "common/*"
+      ],
+      "@features/*": [
+        "features/*"
+      ],
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
