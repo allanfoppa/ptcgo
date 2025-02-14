@@ -12,4 +12,4 @@ import { PrismaService } from '@common/services/prisma/prisma.service';
     PrismaService,
   ],
 })
-export class GetUserByUsernameModule { }
+export class GetUserByUsernameModule {}
