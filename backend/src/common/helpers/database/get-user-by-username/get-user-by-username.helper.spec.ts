@@ -20,7 +20,9 @@ describe('GetUserByUserNameHelper', () => {
     }).compile();
 
     helper = module.get<GetUserByUserNameHelper>(GetUserByUserNameHelper);
-    repository = module.get<GetUserByUsernameRepository>(GetUserByUsernameRepository);
+    repository = module.get<GetUserByUsernameRepository>(
+      GetUserByUsernameRepository,
+    );
   });
 
   it('should be defined', () => {
@@ -28,7 +30,12 @@ describe('GetUserByUserNameHelper', () => {
   });
 
   it('should return the user when it exists', async () => {
-    const mockUser = { id: 1, username: 'testuser', password: 'password', createdAt: new Date() };
+    const mockUser = {
+      id: 1,
+      username: 'testuser',
+      password: 'password',
+      createdAt: new Date(),
+    };
     (repository.getUser as jest.Mock).mockResolvedValue(mockUser); // Set up the mock return value
 
     const user = await helper.getUser('testuser');
@@ -37,4 +44,3 @@ describe('GetUserByUserNameHelper', () => {
     expect(user).toEqual(mockUser); // Verify the returned user
   });
 });
-
