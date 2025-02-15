@@ -5,7 +5,7 @@ type TLogsPath = {
   COMBINED: string;
 };
 
-const basePath: string = 'logger/files';
+const basePath: string = './src/common/logger/files';
 
 export const LOGS_PATH: TLogsPath = {
   DEBUG: `${basePath}/debug.log`,
