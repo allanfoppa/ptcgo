@@ -4,7 +4,7 @@ import { dependencies }  from './package.json';
 
 export default defineConfig({
   server: {
-    port: 3005
+    port: 3099
   },
   moduleFederation: {
     options: {
