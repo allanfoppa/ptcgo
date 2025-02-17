@@ -85,6 +85,7 @@ const Login = () => {
 							id="username"
 							name="username"
 							placeholder="Type our username"
+							autoComplete="username"
 							className="w-full mb-3"
 						/>
 
@@ -96,6 +97,7 @@ const Login = () => {
 							placeholder="Type your password"
 							className="w-full mb-3"
 							inputClassName="w-full mb-3"
+							autoComplete="current-password"
 							feedback={false}
 						/>
 
