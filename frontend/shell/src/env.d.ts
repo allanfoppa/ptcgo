@@ -10,4 +10,5 @@ declare module "core/fetchExample"
 
 declare module "dashboard/Dashboard"
 declare module "login/Login"
+declare module "register/Register"
 declare module "notFound/NotFound"

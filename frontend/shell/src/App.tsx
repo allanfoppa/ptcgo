@@ -5,6 +5,7 @@ import './App.css';
 
 import Login from 'login/Login'
 const Dashboard = lazy(() => import("dashboard/Dashboard"));
+const Register = lazy(() => import("register/Register"));
 const NotFound = lazy(() => import("notFound/NotFound"));
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
         <main>
           <Routes>
             <Route path="/dashboard/*" element={<Dashboard />} />
+            <Route path="/register/*" element={<Register />} />
             <Route path="/" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
