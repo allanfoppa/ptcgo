@@ -44,7 +44,8 @@ This means you can extend an interface by declaring it a second time.
 - CORE: 3002
 - DASHBOARD: 3003
 - LOGIN: 3004
-- NOT FOUND: 3005
+- REGISTER: 3006
+- NOT FOUND: 3099
 
 PS: Create a .env in the future
 
