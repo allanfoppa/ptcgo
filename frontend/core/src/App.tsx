@@ -1,6 +1,6 @@
-import './Core.css';
+import './App.css';
 
-const Core = () => {
+const App = () => {
   return (
     <div className="content">
       <h1>CORE MF</h1>
@@ -9,4 +9,4 @@ const Core = () => {
   );
 };
 
-export default Core;
+export default App;
