@@ -2,6 +2,7 @@
 @import 'primereact/resources/themes/lara-dark-purple/theme.css';
 @import 'primeicons/primeicons.css';
 @import 'primeflex/primeflex.css';
+@import 'normalize.css';
 
 /**
  * sm: => small screens e.g. phones     => @media screen and (min-width: 576px)
@@ -9,3 +10,15 @@
  * lg: => large screens e.g. notebooks  => @media screen and (min-width: 992px)
  * xl: => larger screens e.g monitors   => @media screen and (min-width: 1200px)
  */
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
