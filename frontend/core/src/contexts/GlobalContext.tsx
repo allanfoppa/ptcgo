@@ -4,15 +4,15 @@ import { createContext, useState, type ReactNode } from 'react'
 type TGlobalContext = {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  text: string
-  setText: React.Dispatch<React.SetStateAction<string>>;
+  isLogged: boolean;
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const GlobalContext = createContext<TGlobalContext>({
   loading: false,
   setLoading: () => {},
-  text: '',
-  setText: () => {}
+  isLogged: false,
+  setIsLogged: () => {}
 });
 
 type TGlobalProviderProps = {
@@ -22,11 +22,11 @@ type TGlobalProviderProps = {
 export const GlobalProvider: React.FC<TGlobalProviderProps> = ({ children }) => {
 
   const [ loading, setLoading ] = useState<boolean>(false);
-  const [ text, setText ] = useState<string>('');
+  const [ isLogged, setIsLogged ] = useState<boolean>(false);
 
   const contextValue: TGlobalContext = {
     loading, setLoading,
-    text, setText
+    isLogged, setIsLogged
   }
 
   return (

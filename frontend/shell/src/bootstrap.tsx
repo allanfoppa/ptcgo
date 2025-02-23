@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { GlobalProvider } from 'core/GlobalContext'
-import App from './App';
+import { RouterProvider } from 'core/RouterContext';
+import { pageRoutes } from './constants/routes';
+import './bootstrap.css';
 
 const rootEl = document.getElementById('root');
 if (rootEl) {
@@ -10,7 +12,7 @@ if (rootEl) {
     <React.StrictMode>
       <GlobalProvider>
         <title>PTCGO</title>
-        <App />
+        <RouterProvider routes={pageRoutes} />
       </GlobalProvider>
     </React.StrictMode>,
   );

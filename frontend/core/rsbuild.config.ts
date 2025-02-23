@@ -23,8 +23,11 @@ export default defineConfig({
 				"./fetchExample": "./src/requests/fetch-example",
 				// CONTEXTS
 				"./GlobalContext": "./src/contexts/GlobalContext",
+				"./RouterContext": "./src/contexts/RouterContext",
 				// CONSTANTS
 				"./endpoints": "./src/constants/endpoints",
+				// ENUMS
+				"./RoutePaths": "./src/enums/route-paths",
 			},
 			remotes: {}, // COULD NOT HAVE ANY REMOTE
 			filename: "remoteEntry.js",
