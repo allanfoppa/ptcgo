@@ -1,4 +1,4 @@
-# ANNOTATIONS
+# NOTES
 
 ## CREATE A MF
 
@@ -49,7 +49,7 @@ This means you can extend an interface by declaring it a second time.
 
 PS: Create a .env in the future
 
-## SOME ANNOTATIONS
+## SOME NOTES
 
 LAYOUT:
   ☐ HEADER
