@@ -7,6 +7,16 @@
     "skipLibCheck": true,
     "useDefineForClassFields": true,
 
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": [
+        "components/*"
+      ],
+      "@requests/*": [
+        "requests/*"
+      ]
+    },
+
     /* modules */
     "module": "ESNext",
     "isolatedModules": true,

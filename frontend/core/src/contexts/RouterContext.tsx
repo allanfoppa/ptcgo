@@ -1,6 +1,6 @@
 import React, { createContext, Suspense, useContext } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router';
-import { Header } from '../layout/Header';
+import { Header } from '@layout/Header';
 
 interface RouterContextProps {
   currentRoute: string;

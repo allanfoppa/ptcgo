@@ -10,8 +10,8 @@
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
-    "baseUrl": "./src",
     "resolveJsonModule": true,
+    "baseUrl": "./src",
     "paths": {
       "@common/*": [
         "common/*"

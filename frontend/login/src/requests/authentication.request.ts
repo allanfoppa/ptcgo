@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ENDPOINT_AUTHENTICATION } from "../constants/endpoints.contant";
+import { ENDPOINT_AUTHENTICATION } from "@constants/endpoints.contant";
 
 type TAuthenticationRequest = {
 	username: string;

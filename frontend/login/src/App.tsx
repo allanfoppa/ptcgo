@@ -8,9 +8,9 @@ import { Toast } from "primereact/toast";
 // CORE MFE
 import { InputLabel } from "core/InputLabel";
 // LOGIN MFE
-import { authentication } from "./requests/authentication.request";
-import { DoNotHaveAnAccount } from "./components/DoNotHaveAnAccount";
-import { ForgotYourPassword } from "./components/ForgotYourPassword";
+import { authentication } from "@requests/authentication.request";
+import { DoNotHaveAnAccount } from "@components/DoNotHaveAnAccount";
+import { ForgotYourPassword } from "@components/ForgotYourPassword";
 
 type ActionStateResponse = {
 	metadata: {
@@ -74,7 +74,7 @@ const Login = () => {
 	}, [data]);
 
 	return (
-		<form action={formAction}>
+		<form action={formAction} className="mt-8">
 			<div className="flex align-items-center justify-content-center">
 				<div className="surface-card p-4 shadow-2 border-round w-full lg:w-4">
 					<h2 className="text-center mb-3">LOGIN</h2>

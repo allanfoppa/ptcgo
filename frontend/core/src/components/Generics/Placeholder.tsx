@@ -1,4 +1,4 @@
-import img from "../../assets/images/placeholder-image.webp";
+import img from "@assets/images/placeholder-image.webp";
 
 export const PlaceholderText = () => {
 	return <p data-testid="placeholder-text">Error to load</p>;

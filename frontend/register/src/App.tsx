@@ -6,10 +6,12 @@ import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 // CORE MFE
+import { useRouterContext } from 'core/RouterContext';
+import { RoutePaths } from "core/RoutePaths";
 import { InputLabel } from "core/InputLabel";
 // REGISTER MFE
-import { registerUser } from "./requests/register-user.request";
-import { HaveAnAccount } from "./components/HaveAnAccount";
+import { registerUser } from "@requests/register-user.request";
+import { HaveAnAccount } from "@components/HaveAnAccount";
 
 type ActionStateResponse = {
 	metadata: {
@@ -27,7 +29,9 @@ type ActionStateResponse = {
 };
 
 const Register = () => {
+	const routerContext = useRouterContext();
 	const toast = useRef<Toast>(null);
+	const redirectToLoginAfterRegister = () => setTimeout(() => routerContext.navigate(RoutePaths.HOME), 1000);
 
 	/**
 	 * Handle form submission
@@ -62,6 +66,7 @@ const Register = () => {
 				summary: "Success",
 				detail: data.metadata.message,
 			});
+			redirectToLoginAfterRegister();
 		} else {
 			toast.current?.show({
 				severity: "error",
@@ -72,7 +77,7 @@ const Register = () => {
 	}, [data]);
 
 	return (
-		<form action={formAction}>
+		<form action={formAction} className="mt-8">
 			<div className="flex align-items-center justify-content-center">
 				<div className="surface-card p-4 shadow-2 border-round w-full lg:w-4">
 					<h2 className="text-center mb-3">REGISTER</h2>

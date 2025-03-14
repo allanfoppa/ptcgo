@@ -1,11 +1,11 @@
 import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
 import { Avatar } from 'primereact/avatar';
-import { Logo } from '../components/Media/Logo';
-import { RoutePaths } from '../enums/route-paths';
-import { useRouterContext } from '../contexts/RouterContext';
+import { Logo } from '@components/Media/Logo';
+import { RoutePaths } from '@enums/route-paths';
+import { useRouterContext } from '@contexts/RouterContext';
 import { useContext } from 'react';
-import { GlobalContext } from '../contexts/GlobalContext';
+import { GlobalContext } from '@contexts/GlobalContext';
 
 export const Header = () => {
   const routerContext = useRouterContext();
