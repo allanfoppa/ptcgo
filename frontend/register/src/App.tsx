@@ -94,16 +94,15 @@ const Register = () => {
 							inputClassName="w-full mb-3"
 							autoComplete="create-password"
 						/>
-
-						<Button
-							id="register"
-							data-testid="register"
-							label="Register"
-							icon={"pi pi-user-plus"}
-							disabled={isPending}
-							className="w-full inline-block"
-						/>
 					</div>
+					<Button
+						id="register"
+						data-testid="register"
+						label="Register"
+						icon={"pi pi-user-plus"}
+						disabled={isPending}
+						className="w-full inline-block mt-7"
+					/>
 				</div>
 			</div>
 			<Toast ref={toast} position="top-center" />
