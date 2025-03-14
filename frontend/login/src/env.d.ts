@@ -1,6 +1,7 @@
 /// <reference types="@rsbuild/core/types" />
 
 declare module "core/RouterContext";
+declare module "core/GlobalContext";
 
 declare module "core/RoutePaths";
 

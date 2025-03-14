@@ -51,30 +51,22 @@ const Register = () => {
 	useEffect(() => {
 		if (data.errors) {
 			for (const error of data.errors) {
-				toast.current?.show({
-					severity: "error",
-					summary: "Error",
-					detail: error.message,
-				});
+				showToaster("error", "Error", error.message);
 			}
 			return;
 		}
 
 		if (data.metadata.statusCode === 201) {
-			toast.current?.show({
-				severity: "success",
-				summary: "Success",
-				detail: data.metadata.message,
-			});
+			showToaster("success", "Success", data.metadata.message);
 			redirectToLoginAfterRegister();
 		} else {
-			toast.current?.show({
-				severity: "error",
-				summary: "Error",
-				detail: data.metadata.message,
-			});
+			showToaster("error", "Error", data.metadata.message);
 		}
 	}, [data]);
+
+	const showToaster = (severity: any, summary: string, detail: string) => {
+		toast.current?.show({ severity, summary, detail });
+	};
 
 	return (
 		<form action={formAction} className="mt-8">

@@ -7,6 +7,7 @@ import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 // CORE MFE
 import { InputLabel } from "core/InputLabel";
+import { useGlobalContext } from "core/GlobalContext";
 // LOGIN MFE
 import { authentication } from "@requests/authentication.request";
 import { DoNotHaveAnAccount } from "@components/DoNotHaveAnAccount";
@@ -29,6 +30,7 @@ type ActionStateResponse = {
 };
 
 const Login = () => {
+	const globalContext = useGlobalContext();
 	const toast = useRef<Toast>(null);
 
 	/**
@@ -49,29 +51,27 @@ const Login = () => {
 	useEffect(() => {
 		if (data.errors) {
 			for (const error of data.errors) {
-				toast.current?.show({
-					severity: "error",
-					summary: "Error",
-					detail: error.message,
-				});
+				showToaster("error", "Error", error.message);
 			}
 			return;
 		}
 
 		if (data.metadata.statusCode === 200) {
-			toast.current?.show({
-				severity: "success",
-				summary: "Success",
-				detail: data.metadata.message,
-			});
+			showToaster("success", "Success", data.metadata.message);
+			authenticateUser();
 		} else {
-			toast.current?.show({
-				severity: "error",
-				summary: "Login fail",
-				detail: data.metadata.message,
-			});
+			showToaster("error", "Error", data.metadata.message);
 		}
 	}, [data]);
+
+	const authenticateUser = () => {
+		globalContext.setIsLogged(true);
+		globalContext.setToken(data.data.access_token);
+	}
+
+	const showToaster = (severity: any, summary: string, detail: string) => {
+		toast.current?.show({ severity, summary, detail });
+	};
 
 	return (
 		<form action={formAction} className="mt-8">
