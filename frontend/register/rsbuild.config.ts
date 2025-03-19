@@ -1,6 +1,7 @@
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { dependencies } from './package.json';
+import { pluginRegister } from './rsbuild.plugin';
 
 export default defineConfig({
   server: {
@@ -11,8 +12,8 @@ export default defineConfig({
       name: 'register',
       exposes: {
         // MUST HAVE ONLY ONE EXPOSED COMPONENT IN THIS CASE
-        // LOGIN VIEW
-        './Register': './src/App',
+        // REGISTER VIEW
+        './Register': './src/Register',
       },
       remotes: {
         // COULD HAVE MANY REMOTES HAS YOU NEED
@@ -21,7 +22,7 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       shared: {
         ...dependencies,
-        react: {
+        "react": {
           singleton: true,
           requiredVersion: dependencies['react'],
         },
@@ -32,6 +33,9 @@ export default defineConfig({
       },
     },
   },
-  plugins: [pluginReact()],
+  plugins: [
+    pluginReact(),
+    pluginRegister({ message: 'Hello from register!' }),
+  ],
 });
 

@@ -21,7 +21,7 @@ export default defineConfig({
      },
      shared: {
        ...dependencies,
-       react: {
+       "react": {
          singleton: true,
          requiredVersion: dependencies['react'],
        },

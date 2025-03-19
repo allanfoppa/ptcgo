@@ -4,11 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "rsbuild build",
     "dev": "rsbuild dev --open",
+    "dev:debug": "DEBUG=rsbuild pnpm dev",
+    "dev:rsdoctor": "RSDOCTOR=true rsbuild dev",
+    "build": "rsbuild build",
+    "build:rsdoctor": "RSDOCTOR=true rsbuild build",
+    "preview": "rsbuild preview",
     "format": "prettier --write .",
-    "lint": "eslint .",
-    "preview": "rsbuild preview"
+    "lint": "eslint ."
   },
   "dependencies": {
     "primeflex": "^3.3.1",
@@ -22,6 +25,7 @@
     "@eslint/compat": "^1.2.7",
     "@eslint/js": "^9.21.0",
     "@rsbuild/core": "^1.2.16",
+    "@rsdoctor/rspack-plugin": "^1.0.0",
     "@rsbuild/plugin-react": "^1.1.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",

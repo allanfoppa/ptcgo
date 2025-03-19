@@ -7,6 +7,7 @@ if (rootEl) {
   const root = ReactDOM.createRoot(rootEl);
   root.render(
     <React.StrictMode>
+      <title>Not found page</title>
       <App />
     </React.StrictMode>,
   );

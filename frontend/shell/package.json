@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "rsbuild dev --open",
+    "dev:debug": "DEBUG=rsbuild pnpm dev",
+    "dev:rsdoctor": "RSDOCTOR=true rsbuild dev",
     "build": "rsbuild build",
+    "build:rsdoctor": "RSDOCTOR=true rsbuild build",
     "preview": "rsbuild preview"
   },
   "dependencies": {

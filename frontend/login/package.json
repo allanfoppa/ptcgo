@@ -3,10 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "rsbuild build",
-    "check": "biome check --write",
     "dev": "rsbuild dev --open",
-    "format": "biome format --write",
+    "dev:debug": "DEBUG=rsbuild pnpm dev",
+    "dev:rsdoctor": "RSDOCTOR=true rsbuild dev",
+    "build": "rsbuild build",
+    "build:rsdoctor": "RSDOCTOR=true rsbuild build",
     "preview": "rsbuild preview"
   },
   "dependencies": {
@@ -18,9 +19,9 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.3",
     "@rsbuild/core": "^1.1.8",
     "@rsbuild/plugin-react": "^1.0.7",
+    "@rsdoctor/rspack-plugin": "^1.0.0",
     "@types/node": "^22.13.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

@@ -1,4 +1,5 @@
 import { defineConfig } from '@rsbuild/core';
+import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { dependencies } from './package.json';
 
@@ -30,6 +31,16 @@ export default defineConfig({
           requiredVersion: dependencies['react-dom'],
         },
       },
+    },
+  },
+  tools: {
+    rspack: {
+      plugins: [
+        process.env.RSDOCTOR === 'true' &&
+          new RsdoctorRspackPlugin({
+            mode: 'normal',
+          }),
+      ],
     },
   },
   plugins: [pluginReact()],

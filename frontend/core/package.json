@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "rsbuild dev --open",
+    "dev:debug": "DEBUG=rsbuild pnpm dev",
+    "dev:rsdoctor": "RSDOCTOR=true rsbuild dev",
     "build": "rsbuild build",
+    "build:rsdoctor": "RSDOCTOR=true rsbuild build",
     "preview": "rsbuild preview",
     "jest": "jest"
   },
@@ -14,7 +17,8 @@
     "primeicons": "^7.0.0",
     "primereact": "^10.9.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router": "^7.3.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.26.9",
@@ -23,6 +27,7 @@
     "@jest/globals": "^29.7.0",
     "@rsbuild/core": "^1.1.8",
     "@rsbuild/plugin-react": "^1.0.7",
+    "@rsdoctor/rspack-plugin": "^1.0.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",

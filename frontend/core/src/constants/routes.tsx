@@ -1,30 +1,35 @@
 import { lazy } from 'react';
 
-import Login from 'login/Login';
+const Login = lazy(() => import('login/Login'));
 const Dashboard = lazy(() => import('dashboard/Dashboard'));
 const Register = lazy(() => import('register/Register'));
 const Decks = lazy(() => import('decks/Decks'));
 const NotFound = lazy(() => import('notFound/NotFound'));
 
-export const pageRoutes = [
+export const routes = [
   {
-    path: '/dashboard/*',
-    element: <Dashboard />
+    path: '/',
+    element: <Dashboard />,
+    protected: true,
   },
   {
     path: '/register/*',
-    element: <Register />
+    element: <Register />,
+    protected: false,
   },
   {
-    path: '/',
-    element: <Login />
+    path: '/login/*',
+    element: <Login />,
+    protected: false,
   },
   {
     path: '/decks',
-    element: <Decks />
+    element: <Decks />,
+    protected: true,
   },
   {
     path: '*',
-    element: <NotFound />
+    element: <NotFound />,
+    protected: false,
   }
 ]

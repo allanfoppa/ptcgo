@@ -7,11 +7,11 @@ const Dashboard = () => {
   const { text }: { text: string } = useContext(GlobalContext);
 
   return (
-    <p>
+    <div>
       <b>DASHBOARD:</b>
       <br />
       {text || <PlaceholderText />}
-    </p>
+    </div>
   );
 };
 

@@ -3,10 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "rsbuild build",
-    "check": "biome check --write",
     "dev": "rsbuild dev --open",
-    "format": "biome format --write",
+    "dev:debug": "DEBUG=rsbuild pnpm dev",
+    "dev:rsdoctor": "RSDOCTOR=true rsbuild dev",
+    "build": "rsbuild build",
+    "build:rsdoctor": "RSDOCTOR=true rsbuild build",
     "preview": "rsbuild preview"
   },
   "dependencies": {

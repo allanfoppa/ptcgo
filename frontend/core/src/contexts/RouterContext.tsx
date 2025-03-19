@@ -1,6 +1,9 @@
-import React, { createContext, Suspense, useContext } from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router';
+import React, { createContext, Suspense, useContext, JSX } from 'react';
+import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router';
 import { Header } from '@layout/Header';
+import { GlobalContext } from '@contexts/GlobalContext';
+import { routes } from '@constants/routes';
+import { RoutePaths } from '@enums/route-paths';
 
 interface RouterContextProps {
   currentRoute: string;
@@ -9,19 +12,15 @@ interface RouterContextProps {
 
 const RouterContext = createContext<RouterContextProps | undefined>(undefined);
 
-export const useRouterContext = () => {
-  const context = useContext(RouterContext);
-  if (!context) {
-    throw new Error('useRouterContext must be used within a RouterProvider');
-  }
-  return context;
-};
-
-interface RouterProviderProps {
-  routes: { path: string; element: React.ReactNode }[];
+type routeType = {
+  path: string;
+  element: JSX.Element;
+  protected: boolean;
 }
 
-export const RouterProvider: React.FC<RouterProviderProps> = ({ routes }) => {
+export const RouterProvider: React.FC = () => {
+  const { isLogged } = useContext(GlobalContext);
+
   const routerContextValue: RouterContextProps = {
     currentRoute: window.location.pathname,
     navigate: (path: string) => {
@@ -37,8 +36,12 @@ export const RouterProvider: React.FC<RouterProviderProps> = ({ routes }) => {
           <Header />
           <main className='container mx-auto'>
             <Routes>
-              {routes.map((route, index) => (
-                <Route key={index} path={route.path} element={route.element} />
+              {routes.map((route: routeType) => (
+                route.protected && !isLogged ? (
+                  <Route key={route.path} path={route.path} element={<Navigate to={RoutePaths.LOGIN} />} />
+                ) : (
+                  <Route key={route.path} path={route.path} element={route.element} />
+                )
               ))}
             </Routes>
           </main>
@@ -46,4 +49,12 @@ export const RouterProvider: React.FC<RouterProviderProps> = ({ routes }) => {
       </Router>
     </RouterContext.Provider>
   );
+};
+
+export const useRouterContext = () => {
+  const context = useContext(RouterContext);
+  if (!context) {
+    throw new Error('useRouterContext must be used within a RouterProvider');
+  }
+  return context;
 };
