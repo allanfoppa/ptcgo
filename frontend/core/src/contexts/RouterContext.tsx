@@ -35,7 +35,7 @@ export const RouterProvider: React.FC<RouterProviderProps> = ({ routes }) => {
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
           <Header />
-          <main>
+          <main className='container mx-auto'>
             <Routes>
               {routes.map((route, index) => (
                 <Route key={index} path={route.path} element={route.element} />

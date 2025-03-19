@@ -31,18 +31,21 @@ export const Header = () => {
       template: itemRenderer
     },
     {
-      label: 'Decks',
-      icon: 'pi pi-th-large',
-      url: RoutePaths.REGISTER,
-      template: itemRenderer
-    },
-    {
       label: 'About',
       icon: 'pi pi-info-circle',
       url: RoutePaths.NOT_FOUND,
       template: itemRenderer
     },
   ];
+
+  if (isLogged) {
+    items.push({
+      label: 'Decks',
+      icon: 'pi pi-th-large',
+      url: RoutePaths.DECKS,
+      template: itemRenderer
+    });
+  }
 
   return (
     <Menubar

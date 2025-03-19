@@ -8,6 +8,8 @@ import { Toast } from "primereact/toast";
 // CORE MFE
 import { InputLabel } from "core/InputLabel";
 import { useGlobalContext } from "core/GlobalContext";
+import { useRouterContext } from 'core/RouterContext';
+import { RoutePaths } from "core/RoutePaths";
 // LOGIN MFE
 import { authentication } from "@requests/authentication.request";
 import { DoNotHaveAnAccount } from "@components/DoNotHaveAnAccount";
@@ -31,6 +33,7 @@ type ActionStateResponse = {
 
 const Login = () => {
 	const globalContext = useGlobalContext();
+	const routerContext = useRouterContext();
 	const toast = useRef<Toast>(null);
 
 	/**
@@ -67,6 +70,7 @@ const Login = () => {
 	const authenticateUser = () => {
 		globalContext.setIsLogged(true);
 		globalContext.setToken(data.data.access_token);
+		routerContext.navigate(RoutePaths.DECKS);
 	}
 
 	const showToaster = (severity: any, summary: string, detail: string) => {
@@ -76,7 +80,7 @@ const Login = () => {
 	return (
 		<form action={formAction} className="mt-8">
 			<div className="flex align-items-center justify-content-center">
-				<div className="surface-card p-4 shadow-2 border-round w-full lg:w-4">
+				<div className="surface-card p-4 shadow-2 border-round w-29rem">
 					<h2 className="text-center mb-3">LOGIN</h2>
 					<DoNotHaveAnAccount />
 					<div>
