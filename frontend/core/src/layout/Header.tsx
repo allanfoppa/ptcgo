@@ -25,11 +25,19 @@ export const Header = () => {
 
   const items: MenuItem[] = [
     {
-      label: 'Home',
-      icon: 'pi pi-home',
+      label: 'Dashboard',
+      icon: 'pi pi-chart-bar',
       url: RoutePaths.HOME,
       template: itemRenderer
     },
+    ...(isLogged
+      ? [{
+          label: 'Decks',
+          icon: 'pi pi-th-large',
+          url: RoutePaths.DECKS,
+          template: itemRenderer
+        }]
+      : []),
     {
       label: 'About',
       icon: 'pi pi-info-circle',
@@ -37,15 +45,6 @@ export const Header = () => {
       template: itemRenderer
     },
   ];
-
-  if (isLogged) {
-    items.push({
-      label: 'Decks',
-      icon: 'pi pi-th-large',
-      url: RoutePaths.DECKS,
-      template: itemRenderer
-    });
-  }
 
   return (
     <Menubar
