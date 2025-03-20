@@ -70,6 +70,7 @@ const Login = () => {
 	const authenticateUser = () => {
 		globalContext.setIsLogged(true);
 		globalContext.setToken(data.data.access_token);
+		globalContext.setUser(data.data.username);
 		routerContext.navigate(RoutePaths.DECKS);
 	}
 

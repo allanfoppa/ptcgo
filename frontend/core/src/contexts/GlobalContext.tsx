@@ -7,6 +7,8 @@ type TGlobalContext = {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isLogged: boolean;
   setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
+  user: string;
+  setUser: React.Dispatch<React.SetStateAction<string>>;
   // NOTE: The token is included here for convenience. It is not stored in cookies or any other more secure way.
   token: string;
   setToken: React.Dispatch<React.SetStateAction<string>>;
@@ -18,7 +20,9 @@ export const GlobalContext = createContext<TGlobalContext>({
   isLogged: false,
   setIsLogged: () => {},
   token: '',
-  setToken: () => {}
+  setToken: () => {},
+  user: '',
+  setUser: () => {}
 });
 
 type TGlobalProviderProps = {
@@ -30,11 +34,13 @@ export const GlobalProvider: React.FC<TGlobalProviderProps> = ({ children }) => 
   const [ loading, setLoading ] = useState<boolean>(false);
   const [ isLogged, setIsLogged ] = useState<boolean>(false);
   const [ token, setToken ] = useState<string>('');
+  const [ user, setUser ] = useState<string>('');
 
   const contextValue: TGlobalContext = {
     loading, setLoading,
     isLogged, setIsLogged,
-    token, setToken
+    token, setToken,
+    user, setUser
   }
 
   return (

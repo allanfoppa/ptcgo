@@ -9,7 +9,9 @@ import { GlobalContext } from '@contexts/GlobalContext';
 
 export const Header = () => {
   const routerContext = useRouterContext();
-  const { isLogged } = useContext(GlobalContext);
+  const { isLogged, user } = useContext(GlobalContext);
+
+  const firstLetter = user.charAt(0).toUpperCase();
 
   const itemRenderer = (item: any) => (
     <div className='p-menuitem-content'>
@@ -53,7 +55,7 @@ export const Header = () => {
       start={<Logo extraClass='max-h-full' />}
       end={isLogged &&
         <Avatar
-          icon="pi pi-user"
+          label={firstLetter}
           shape="circle"
           size="large"
           className="p-mr-2"

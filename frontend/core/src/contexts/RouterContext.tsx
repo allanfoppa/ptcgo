@@ -34,7 +34,7 @@ export const RouterProvider: React.FC = () => {
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
           <Header />
-          <main className='container mx-auto'>
+          <main className='container mx-auto my-3'>
             <Routes>
               {routes.map((route: routeType) => (
                 route.protected && !isLogged ? (
