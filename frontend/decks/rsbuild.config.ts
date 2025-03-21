@@ -12,7 +12,7 @@ export default defineConfig({
       exposes: {
         // MUST HAVE ONLY ONE EXPOSED COMPONENT IN THIS CASE
         // DECKS VIEW
-        './Decks': './src/Decks.logic',
+        './Decks': './src/Decks.handler',
       },
       remotes: {
         // COULD HAVE MANY REMOTES HAS YOU NEED

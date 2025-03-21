@@ -1,38 +1,48 @@
-import { Button } from 'primereact/button';
+import { CreateDeck } from './components/CreateDeck/CreateDeck';
 import { DeckCard } from './components/DeckCard/DeckCard.view';
-
-interface Deck {
-  name: string;
-  description: string;
-}
+import { NoDecksAvailable } from './components/NoDecksAvailable/NoDecksAvailable';
+import { PageTitle } from './components/PageTitle/PageTitle';
 
 interface DecksViewProps {
-  list: Deck[];
+  decks: {
+    id: number;
+    name: string;
+    description: string;
+  }[];
+  decksLength: number;
 }
 
 const DecksView = ({
-  list
+  decks
 }: DecksViewProps) => {
-
-  const mainParagraph = <p>Your PTCG Decks</p>
-  const createDeck = <Button label="Create Deck" onClick={() => alert('temp')} icon="pi pi-plus" />
-
   return (
-    <div>
-      <div className='flex justify-content-between mb-4'>
-        {mainParagraph}
-        {createDeck}
+    <>
+      <div className='grid align-items-center mb-3'>
+        <div className='col-6'>
+          <PageTitle />
+        </div>
+        <div className='col-6 text-right'>
+          <CreateDeck />
+        </div>
       </div>
-      <div className="grid">
-        {list.map((deck) => (
-          <DeckCard
-            key={deck.name}
-            name={deck.name}
-            description={deck.description}
-          />
-        ))}
-      </div>
-    </div>
+
+      {decks.length === 0
+        ? <NoDecksAvailable />
+        : (
+          <div className="grid">
+            {
+              decks.map((deck) => (
+                <DeckCard
+                  key={deck.id}
+                  name={deck.name}
+                  description={deck.description}
+                />
+              ))
+            }
+          </div>
+        )
+      }
+    </>
   );
 };
 
