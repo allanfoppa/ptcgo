@@ -1,19 +1,12 @@
 import { CreateDeck } from './components/CreateDeck/CreateDeck';
-import { DeckCard } from './components/DeckCard/DeckCard.view';
-import { NoDecksAvailable } from './components/NoDecksAvailable/NoDecksAvailable';
 import { PageTitle } from './components/PageTitle/PageTitle';
 
 interface DecksViewProps {
-  decks: {
-    id: number;
-    name: string;
-    description: string;
-  }[];
-  decksLength: number;
+  DeckTemplate: React.FC;
 }
 
 const DecksView = ({
-  decks
+  DeckTemplate
 }: DecksViewProps) => {
   return (
     <>
@@ -25,23 +18,9 @@ const DecksView = ({
           <CreateDeck />
         </div>
       </div>
-
-      {decks.length === 0
-        ? <NoDecksAvailable />
-        : (
-          <div className="grid">
-            {
-              decks.map((deck) => (
-                <DeckCard
-                  key={deck.id}
-                  name={deck.name}
-                  description={deck.description}
-                />
-              ))
-            }
-          </div>
-        )
-      }
+      <div>
+        <DeckTemplate />
+      </div>
     </>
   );
 };

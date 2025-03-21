@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { NoDecksAvailable } from "./components/NoDecksAvailable/NoDecksAvailable";
+import { DeckCard } from "./components/DeckCard/DeckCard.view";
 
 interface DecksComponentProps {
   children: (props: unknown) => React.ReactNode;
@@ -15,7 +17,6 @@ const DecksLogic: React.FC<DecksComponentProps> = ({
 }) => {
 
   const [ decks, setDecks ] = useState<Deck[]>([]);
-  const [ decksLength, setDecksLength ] = useState<number>(0);
 
   useEffect(() => {
     const decksData = [
@@ -46,15 +47,33 @@ const DecksLogic: React.FC<DecksComponentProps> = ({
       },
     ]
 
-    setDecksLength(decksData.length);
     setDecks(decksData);
   }, [])
+
+  const DeckTemplate = () => {
+    return (
+      decks.length === 0
+        ? <NoDecksAvailable />
+        : (
+          <div className="grid">
+            {
+              decks.map((deck) => (
+                <DeckCard
+                  key={deck.id}
+                  name={deck.name}
+                  description={deck.description}
+                />
+              ))
+            }
+          </div>
+        )
+    );
+  }
 
   return (
     <>
       {children({
-        decks,
-        decksLength
+        DeckTemplate
       })}
     </>
   );
