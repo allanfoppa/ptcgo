@@ -1,4 +1,3 @@
-import { required } from '@common/utilities/mark-as-required.util';
 import { z } from 'zod';
 
 export const registrationSchema = z
@@ -19,7 +18,6 @@ export const registrationSchema = z
       .min(8)
       .max(32),
   })
-  .required()
-  .transform(required);
+  .required();
 
 export type RegistrationDto = z.infer<typeof registrationSchema>;

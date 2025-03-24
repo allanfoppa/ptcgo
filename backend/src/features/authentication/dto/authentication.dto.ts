@@ -1,4 +1,3 @@
-import { required } from '@common/utilities/mark-as-required.util';
 import { z } from 'zod';
 
 export const authenticationSchema = z
@@ -14,7 +13,6 @@ export const authenticationSchema = z
       invalid_type_error: 'Password must be a string',
     }),
   })
-  .required()
-  .transform(required);
+  .required();
 
 export type AuthenticationDto = z.infer<typeof authenticationSchema>;
