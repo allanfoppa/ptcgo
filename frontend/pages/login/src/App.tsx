@@ -8,6 +8,7 @@ import { Toast } from "primereact/toast";
 // CORE MFE
 import { InputLabel } from "core/InputLabel";
 import { useGlobalContext } from "core/GlobalContext";
+import { useUserContext } from "core/UserContext";
 import { useRouterContext } from 'core/RouterContext';
 import { RoutePaths } from "core/RoutePaths";
 // LOGIN MFE
@@ -33,6 +34,7 @@ type ActionStateResponse = {
 
 const Login = () => {
 	const globalContext = useGlobalContext();
+	const userContext = useUserContext();
 	const routerContext = useRouterContext();
 	const toast = useRef<Toast>(null);
 
@@ -60,19 +62,16 @@ const Login = () => {
 		}
 
 		if (data.metadata.statusCode === 200) {
+			globalContext.setIsLogged(true);
+			userContext.setUserId(data.data.id);
+			userContext.setUser(data.data.username);
+			userContext.setToken(data.data.access_token);
+			routerContext.navigate(RoutePaths.DECKS);
 			showToaster("success", "Success", data.metadata.message);
-			authenticateUser();
 		} else {
 			showToaster("error", "Error", data.metadata.message);
 		}
 	}, [data]);
-
-	const authenticateUser = () => {
-		globalContext.setIsLogged(true);
-		globalContext.setToken(data.data.access_token);
-		globalContext.setUser(data.data.username);
-		routerContext.navigate(RoutePaths.DECKS);
-	}
 
 	const showToaster = (severity: any, summary: string, detail: string) => {
 		toast.current?.show({ severity, summary, detail });

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ENDPOINT } from "core/endpoints";
+import { ENDPOINT_REGISTRATION } from "core/endpoints";
 
 type TRegisterUserRequest = {
 	username: string;
@@ -67,7 +67,7 @@ export const registerUser = async (
 		body: JSON.stringify(data),
 	};
 
-	const response = await fetch(ENDPOINT.REGISTRATION, params);
+	const response = await fetch(ENDPOINT_REGISTRATION, params);
 	const json = await response.json();
 	return json;
 };

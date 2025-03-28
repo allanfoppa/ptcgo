@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 
 interface HandlerLogicViewProps {
-  Logic: React.ComponentType<{ children: (handler: Record<string, unknown>) => React.ReactNode }>;
-  View: React.ComponentType<Record<string, unknown>>;
+  Logic: React.ComponentType<any>;
+  View: React.ComponentType<any>;
 }
 
 const HandlerLogicView: React.FC<HandlerLogicViewProps> = ({ Logic, View }) => {
   return (
     <Logic>
-      {(handler: Record<string, unknown>) => <View {...handler} />}
+      {(handler: any) => <View {...handler} />}
     </Logic>
   );
 };

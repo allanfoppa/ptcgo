@@ -24,6 +24,7 @@ export default defineConfig({
 				// CONTEXTS
 				"./GlobalContext": "./src/contexts/GlobalContext",
 				"./RouterContext": "./src/contexts/RouterContext",
+				"./UserContext": "./src/contexts/UserContext",
 				// CONSTANTS
 				"./endpoints": "./src/constants/endpoints",
 				// ENUMS

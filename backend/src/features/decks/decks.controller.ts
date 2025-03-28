@@ -12,6 +12,7 @@ import {
 import { DecksService } from './decks.service';
 import { CreateDeckDto } from './dto/create-deck.dto';
 import { UpdateDeckDto } from './dto/update-deck.dto';
+import { log } from 'console';
 
 @Controller('decks')
 export class DecksController {
@@ -48,6 +49,7 @@ export class DecksController {
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
+    log('id', id);
     return this.decksService.remove({ id });
   }
 }

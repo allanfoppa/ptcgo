@@ -4,14 +4,15 @@ import { Avatar } from 'primereact/avatar';
 import { Logo } from '@components/Media/Logo';
 import { RoutePaths } from '@enums/route-paths';
 import { useRouterContext } from '@contexts/RouterContext';
-import { useContext } from 'react';
-import { GlobalContext } from '@contexts/GlobalContext';
+import { useGlobalContext } from '@contexts/GlobalContext';
+import { useUserContext } from '@contexts/UserContext';
 
 export const Header = () => {
   const routerContext = useRouterContext();
-  const { isLogged, user } = useContext(GlobalContext);
+  const userContext = useUserContext();
+  const globalContext = useGlobalContext();
 
-  const firstLetter = user.charAt(0).toUpperCase();
+  const firstLetter = userContext.user.charAt(0).toUpperCase();
 
   const itemRenderer = (item: any) => (
     <div className='p-menuitem-content'>
@@ -26,19 +27,22 @@ export const Header = () => {
   );
 
   const items: MenuItem[] = [
-    {
-      label: 'Dashboard',
-      icon: 'pi pi-chart-bar',
-      url: RoutePaths.HOME,
-      template: itemRenderer
-    },
-    ...(isLogged
-      ? [{
+    ...(globalContext.isLogged
+      ?
+      [
+        {
+          label: 'Dashboard',
+          icon: 'pi pi-chart-bar',
+          url: RoutePaths.HOME,
+          template: itemRenderer
+        },
+        {
           label: 'Decks',
           icon: 'pi pi-th-large',
           url: RoutePaths.DECKS,
           template: itemRenderer
-        }]
+        },
+      ]
       : []),
     {
       label: 'About',
@@ -48,19 +52,24 @@ export const Header = () => {
     },
   ];
 
-  return (
-    <Menubar
-      className='mx-2 mb-4 mt-2 gap-3'
-      model={items}
-      start={<Logo extraClass='max-h-full' />}
-      end={isLogged &&
+  const ShowAvatar = () => {
+    return (
+      globalContext.isLogged &&
         <Avatar
           label={firstLetter}
           shape="circle"
           size="large"
           className="p-mr-2"
         />
-      }
+    )
+  }
+
+  return (
+    <Menubar
+      className='mx-2 mb-4 mt-2 gap-3'
+      model={items}
+      start={<Logo extraClass='max-h-full' />}
+      end={<ShowAvatar />}
     />
   )
 }

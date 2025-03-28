@@ -5,11 +5,13 @@ import { DeckCardFooterController } from '../DeckCardFooter/DeckCardFooter.logic
 interface DeckCardProps {
   name: string;
   description: string;
+  handleDeleteDeck: () => void;
 }
 
 export const DeckCard = ({
   name,
-  description
+  description,
+  handleDeleteDeck
 }: DeckCardProps) => {
 
   const header = PlaceholderImage;
@@ -20,7 +22,7 @@ export const DeckCard = ({
         <Card
           header={header}
           title={name}
-          footer={<DeckCardFooterController />}
+          footer={<DeckCardFooterController handleDeleteDeck={handleDeleteDeck} />}
         >
           <p className="m-0 h-3rem">
             {description}

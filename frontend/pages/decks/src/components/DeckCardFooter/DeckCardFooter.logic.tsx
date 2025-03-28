@@ -1,7 +1,13 @@
 import { MenuItem } from 'primereact/menuitem';
 import { DeckCardFooterView } from './DeckCardFooter.view';
 
-export const DeckCardFooterController = () => {
+interface DeckCardFooterControllerProps {
+  handleDeleteDeck: () => void;
+}
+
+export const DeckCardFooterController = ({
+  handleDeleteDeck
+}: DeckCardFooterControllerProps) => {
 
   const items: MenuItem[] = [
     {
@@ -14,9 +20,7 @@ export const DeckCardFooterController = () => {
     {
       label: 'Delete',
       icon: 'pi pi-times',
-      command: () => {
-        console.log('delete');
-      }
+      command: () => handleDeleteDeck()
     }
   ];
 

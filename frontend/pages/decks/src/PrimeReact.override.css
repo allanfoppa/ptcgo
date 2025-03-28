@@ -1,0 +1,10 @@
+
+/**
+ * PrimeReact CSS overrides
+ * This file contains custom styles to override PrimeReact default styles.
+ * It is recommended to use this file for any override needed for the PrimeReact components.
+ */
+
+.p-card-header img {
+  border-radius: 6px !important;
+}

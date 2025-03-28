@@ -2,6 +2,7 @@
 
 declare module "core/RouterContext";
 declare module "core/GlobalContext";
+declare module "core/UserContext";
 
 declare module "core/RoutePaths";
 
